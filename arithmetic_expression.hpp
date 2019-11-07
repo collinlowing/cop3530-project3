@@ -6,7 +6,7 @@ class ArithmeticExpression
 	private:
 
 	public:
-
+		ArithmeticExpression(std::string op1, std::string op2, char operation);
 };
 
 #endif
