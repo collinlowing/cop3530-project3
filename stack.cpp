@@ -10,7 +10,6 @@ void Stack::push(int val)
     Node* newNode = new Node(val);
     newNode->setNext(top);
     top = newNode;
-    delete newNode;
 }
 
 int Stack::pop()
