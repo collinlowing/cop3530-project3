@@ -9,6 +9,7 @@ class Node
 	public:
 		Node(int data);
 		int getValue();
+		void setNext(Node* next);
 		Node* getNext();
 };
 
