@@ -11,9 +11,7 @@ class BigIntegerArithmetic
 		void add();
 		void subtract();
 		std::string showsResults();
-		bool op1IsBigger(int a, int b); //fix parameters
-
-
+		bool op1IsBigger(std::string val1, std::string val2);
 };
 
 #endif
