@@ -1,10 +1,10 @@
 #include "arithmetic_expression.hpp"
 
-ArithmeticExpression::ArithmeticExpression(std::string op1, std::string op2, char operator)
+ArithmeticExpression::ArithmeticExpression(std::string op1, std::string op2, char operation)
 {
 	this->op1 = new Operand(op1);
 	this->op2 = new Operand(op2);
-	this->operator = operator;
+	this->operation = operation;
 }
 
 Operand* ArithmeticExpression::getOp1()
@@ -19,11 +19,11 @@ Operand* ArithmeticExpression::getOp2()
 
 char ArithmeticExpression::getOperator()
 {
-	return operator;
+	return operation;
 }
 
 std::ostream& operator<<(std::ostream& os, const ArithmeticExpression& ae)
 {
-	os << op1->getValue() << " " << op2->getValue() << " " << operation;
+	os << ae.op1->getValue() << " " << ae.op2->getValue() << " " << ae.operation;
 	return os;
 }
