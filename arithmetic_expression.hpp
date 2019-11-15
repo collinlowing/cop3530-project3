@@ -12,6 +12,7 @@ class ArithmeticExpression
 	public:
 		ArithmeticExpression() {}
 		ArithmeticExpression(std::string op1, std::string op2, char operation);
+		~ArithmeticExpression();
 		Operand* getOp1();
 		Operand* getOp2();
 		char getOperator();

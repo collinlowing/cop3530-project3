@@ -14,7 +14,7 @@ void Stack::push(int val)
 
 int Stack::pop()
 {
-    if(top == nullptr)
+    if(isEmpty())
     {
         return -1;
     }
@@ -40,4 +40,16 @@ bool Stack::isEmpty()
         return false;
     }
     
+}
+
+Stack::~Stack()
+{
+    Node * temp;
+    while(!isEmpty())
+    {
+        temp = top->getNext();
+        top->setNext(temp->getNext());
+        delete temp;
+    }
+    delete top;
 }

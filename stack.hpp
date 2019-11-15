@@ -9,6 +9,7 @@ class Stack
 		Node* top;
 	public:
 		Stack();
+		~Stack();
 		void push(int val);
 		int pop();
 		bool isEmpty();

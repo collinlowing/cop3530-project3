@@ -27,5 +27,6 @@ int main()
         std::cout << bia[i].showResults();
     }
 
+    delete bia;
     return 0;
 }

@@ -31,6 +31,12 @@ char ArithmeticExpression::getOperator()
 	return operation;
 }
 
+ArithmeticExpression::~ArithmeticExpression()
+{
+	delete op1;
+	delete op2;
+}
+
 std::ostream& operator<<(std::ostream& os, const ArithmeticExpression& ae)
 {
 	os << ae.op1->getValue() << " " << ae.op2->getValue() << " " << ae.operation;
