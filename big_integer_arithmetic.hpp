@@ -7,13 +7,17 @@ class BigIntegerArithmetic
 {
 	private:
 		ArithmeticExpression* ae;
+		Stack op1;
+		Stack op2;
+		std::string result;
 	public:
+		BigIntegerArithmetic() {}
 		BigIntegerArithmetic(ArithmeticExpression* ae);
 		void setUp();
 		void add();
 		void subtract();
-		std::string reverse(std::string str);
-		std::string showsResults();
+		void reverse(std::string& str);
+		std::string showResults();
 		bool op1IsBigger(std::string val1, std::string val2);
 };
 

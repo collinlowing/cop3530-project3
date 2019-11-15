@@ -5,6 +5,15 @@ ArithmeticExpression::ArithmeticExpression(std::string op1, std::string op2, cha
 	this->op1 = new Operand(op1);
 	this->op2 = new Operand(op2);
 	this->operation = operation;
+
+	if(this->op1->getLengthOfString() > this->op2->getLengthOfString())
+	{
+		this->op2->pad(this->op1->getLengthOfString() - this->op2->getLengthOfString());
+	}
+	else
+	{
+		this->op1->pad(this->op2->getLengthOfString() - this->op1->getLengthOfString());
+	}
 }
 
 Operand* ArithmeticExpression::getOp1()

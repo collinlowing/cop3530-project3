@@ -54,14 +54,12 @@ TEST_CASE("class BigIntegerArithmetic")
 	ArithmeticExpression* ae = new ArithmeticExpression("364287463834623846283426384", "923742938742934723947239847", '+');
 	BigIntegerArithmetic bia(ae);
 	bia.setUp();
-	bia.add();
 	REQUIRE(bia.showResults() == "     364287463834623846283426384\n    +923742938742934723947239847\n    1288030402577558570230666231\n\n");
 	delete ae;
 
 	ae = new ArithmeticExpression("364287463834623846283426384", "923742938742934723947239847", '-');
 	BigIntegerArithmetic bia2(ae);
 	bia2.setUp();
-	bia2.subtract();
 	REQUIRE(bia2.showResults() == "     364287463834623846283426384\n    -923742938742934723947239847\n    -559455474908310877663813463\n\n");
 	delete ae;
 
@@ -100,7 +98,6 @@ TEST_CASE("class ExpressionReader")
 	std::ostringstream oss;
 	ExpressionReader er;
 	er.readExpressions("expressions.txt");
-	oss << er;
 	REQUIRE(er.toString() == "12 + 5\n5 + 12\n12 - 5\n5 - 12\n364287463834623846283426384 + 923742938742934723947239847\n364287463834623846283426384 - 923742938742934723947239847\n");
 
 }

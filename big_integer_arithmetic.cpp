@@ -7,79 +7,144 @@ BigIntegerArithmetic::BigIntegerArithmetic(ArithmeticExpression* ae)
 
 void BigIntegerArithmetic::setUp()
 {
-	if(ae->getOp1()->getLengthOfString() > )
+
+	for(int i = 0; i < ae->getOp1()->getLengthOfString(); i++)
+	{
+		int num = ae->getOp1()->getValue().at(i) - '0';
+		op1.push(num);
+	}
+
+	for(int i = 0; i < ae->getOp2()->getLengthOfString(); i++)
+	{
+		int num = ae->getOp2()->getValue().at(i) - '0';
+		op2.push(num);
+	}
+
+	if(ae->getOperator() == '+')
+	{
+		add();
+	}
+	else
+	{
+		subtract();
+	}
 }
 
 void BigIntegerArithmetic::add()
 {
-	int n1;
-	int n2;
-	std::string str1 = ae->getOp1()->getValue();
-	std::string str2 = ae->getOp2()->getValue();
-	std::string result = "";
+	int length = ae->getOp1()->getLengthOfString(); 
+	result = "";
 	int carry = 0;
 
-	if(ae->getOp1()->getLengthOfString() < ae->getOp2()->getLengthOfString())
+	
+	for(int i = 0; i < length; i++) 
 	{
-		n1 = ae->getOp1()->getLengthOfString();
-		n2 = ae->getOp2()->getLengthOfString();
-		str1 = ae->getOp1()->getValue();
-		str2 = ae->getOp2()->getValue();
-	}
-	else
-	{
-		n1 = ae->getOp2()->getLengthOfString();
-		n2 = ae->getOp1()->getLengthOfString();
-		str1 = ae->getOp2()->getValue();
-		str2 = ae->getOp1()->getValue();
-	}
-	str1.reserve
-
-	for(int i = 0; i < n1; i++)
-	{
-		int sum = ((str1[i] - '0') + (str2[i] - '0') + carry);
-		result.push_back(sum % 10 + '0');
-		carry = sum / 10;
-	}
-
-	for(int i = 0; i < n2; i++)
-	{
-		int sum = ((str2[i] - '0') + carry);
+		int sum = ((op1.pop()) + (op2.pop()) + carry);
 		result.push_back(sum % 10 + '0');
 		carry = sum / 10;
 	}
 
 	if(carry)
-	{
 		result.push_back(carry + '0');
-	}
+
+	reverse(result);
+}
+
+void BigIntegerArithmetic::reverse(std::string& str)
+{
+	int n = str.length(); 
+  
+    
+    for (int i = 0; i < n / 2; i++) 
+        std::swap(str[i], str[n - i - 1]);
 }
 
 void BigIntegerArithmetic::subtract()
 {
+	int carry = 0;
+	result = "";
+	int length = ae->getOp1()->getLengthOfString();
+	bool isNegative = false;
 
+	if(op1IsBigger(ae->getOp1()->getValue(),ae->getOp2()->getValue()))
+	{
+		for(int i = 0; i < length; i++)
+		{
+			int sub = ((op1.pop()) - (op2.pop()) - carry);
+
+			if(sub < 0)
+			{
+				sub += 10;
+				carry = 1;
+			}
+			else 
+			{
+				carry = 0;
+			}
+			
+			result.push_back(sub + '0');
+		}
+	}
+	else
+	{
+		isNegative = true;
+
+		for(int i = 0; i < length; i++)
+		{
+			int sub = ((op2.pop()) - (op1.pop()) - carry);
+
+			if(sub < 0)
+			{
+				sub += 10;
+				carry = 1;
+			}
+			else 
+			{
+				carry = 0;
+			}
+			
+			result.push_back(sub + '0');
+		}
+	}
+
+	if(isNegative)
+	{
+		result.push_back('-');
+	}
+
+	reverse(result);
 }
 
-std::string BigIntegerArithmetic::reverse(std::string str)
+std::string BigIntegerArithmetic::showResults()
 {
-	std::string reverseStr;
+	std::string output = "";
 
-	//FIXME
+	output += "     " + ae->getOp1()->getValue() + "\n    " + ae->getOperator() + ae->getOp2()->getValue() + "\n    " + result + "\n\n";
 
-	return reverseStr;
-}
-
-std::string BigIntegerArithmetic::showsResults()
-{
-	std::string result = "";
-
-	result += "     " + ae->getOp1()->getValue() + "\n    " + ae->getOperator + ae->getOp2()->getValue();
-
-	return result;
+	return output;
 }
 
 bool BigIntegerArithmetic::op1IsBigger(std::string val1, std::string val2)
 {
+	int l1 = val1.length();
+	int l2 = val2.length();
+	int i1;
+	int i2;
+	if(l1 < l2)
+		return false;
+	else if(l1 > l2)
+		return true;
+	
 
-	return false;
+	for(int i = 0; i < l1; i++)
+	{
+		i1 = val1.at(i) - '0';
+		i2 = val2.at(i) - '0';
+
+		if(i1 > i2)
+			return true;
+		else if(i1 < i2)
+			return false;
+	}
+	return true;
 }

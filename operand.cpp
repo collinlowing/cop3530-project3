@@ -34,10 +34,5 @@ int Operand::getLengthOfString()
 
 void Operand::pad(int zeros)
 {
-    std::string temp = "";
-    for(int i = 0; i < zeros; i++)
-    {
-        temp += "0";
-    }
-    temp += val;
+    val = std::string(zeros, '0').append(val);
 }
